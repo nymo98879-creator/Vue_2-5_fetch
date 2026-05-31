@@ -8,6 +8,7 @@
         <li>{{ getSingleProduct.product.price }}</li>
         <img :src="`${getSingleProduct.product.image}`" alt="" width="100" />
       </ul>
+      <button @click="addCard.addToCard(getSingleProduct.product)">Add To Card</button>
     </div>
     <div v-else>
         <p>Product Loading ....</p>
@@ -20,9 +21,11 @@
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import productStore from "../store/productStore";
+import cartItem from "../store/cartStore";
 
 const route = useRoute();
 const getSingleProduct = productStore();
+const addCard = cartItem()
 onMounted(() => {
   getSingleProduct.fetchProductById(route.params.id);
 });
